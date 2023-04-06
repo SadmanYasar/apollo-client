@@ -133,7 +133,7 @@ export interface SuspenseQueryHookOptions<
   fetchPolicy?: SuspenseQueryHookFetchPolicy;
   suspensePolicy?: SuspensePolicy;
   suspenseCache?: SuspenseCache;
-  queryKey?: string | number | any[];
+  suspenseKey?: string | number | any[];
 }
 
 /**

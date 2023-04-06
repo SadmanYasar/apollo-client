@@ -1153,7 +1153,7 @@ describe('useSuspenseQuery', () => {
     ]);
   });
 
-  it('allows custom query key so two components that share same query and variables do not interfere with each other', async () => {
+  it('allows custom suspense key so two components that share same query and variables do not interfere with each other', async () => {
     interface Data {
       todo: {
         id: number;
@@ -1224,7 +1224,7 @@ describe('useSuspenseQuery', () => {
         // component is independent of each other
         fetchPolicy: 'no-cache',
         variables: { id: 1 },
-        queryKey: [name],
+        suspenseKey: [name],
       });
 
       return (
@@ -1271,7 +1271,7 @@ describe('useSuspenseQuery', () => {
     );
   });
 
-  it('suspends and refetches data when changing query keys', async () => {
+  it('suspends and refetches data when changing suspense keys', async () => {
     const { query } = useSimpleQueryCase();
 
     const mocks = [
@@ -1288,10 +1288,10 @@ describe('useSuspenseQuery', () => {
     ];
 
     const { result, rerender, renders } = renderSuspenseHook(
-      ({ queryKey }) =>
+      ({ suspenseKey }) =>
         // intentionally use a fetch policy that will execute a network request
-        useSuspenseQuery(query, { queryKey, fetchPolicy: 'network-only' }),
-      { mocks, initialProps: { queryKey: ['first'] } }
+        useSuspenseQuery(query, { suspenseKey, fetchPolicy: 'network-only' }),
+      { mocks, initialProps: { suspenseKey: ['first'] } }
     );
 
     await waitFor(() => {
@@ -1302,7 +1302,7 @@ describe('useSuspenseQuery', () => {
       });
     });
 
-    rerender({ queryKey: ['second'] });
+    rerender({ suspenseKey: ['second'] });
 
     await waitFor(() => {
       expect(result.current).toMatchObject({
@@ -1328,7 +1328,7 @@ describe('useSuspenseQuery', () => {
     ]);
   });
 
-  it('suspends and refetches data when part of the query key changes', async () => {
+  it('suspends and refetches data when part of the suspense key changes', async () => {
     const { query } = useSimpleQueryCase();
 
     const mocks = [
@@ -1345,10 +1345,10 @@ describe('useSuspenseQuery', () => {
     ];
 
     const { result, rerender, renders } = renderSuspenseHook(
-      ({ queryKey }) =>
+      ({ suspenseKey }) =>
         // intentionally use a fetch policy that will execute a network request
-        useSuspenseQuery(query, { queryKey, fetchPolicy: 'network-only' }),
-      { mocks, initialProps: { queryKey: ['greeting', 1] } }
+        useSuspenseQuery(query, { suspenseKey, fetchPolicy: 'network-only' }),
+      { mocks, initialProps: { suspenseKey: ['greeting', 1] } }
     );
 
     await waitFor(() => {
@@ -1359,7 +1359,7 @@ describe('useSuspenseQuery', () => {
       });
     });
 
-    rerender({ queryKey: ['greeting', 2] });
+    rerender({ suspenseKey: ['greeting', 2] });
 
     await waitFor(() => {
       expect(result.current).toMatchObject({
@@ -1385,7 +1385,7 @@ describe('useSuspenseQuery', () => {
     ]);
   });
 
-  it('suspends and refetches when using plain string query keys', async () => {
+  it('suspends and refetches when using plain string suspense keys', async () => {
     const { query } = useSimpleQueryCase();
 
     const mocks = [
@@ -1402,10 +1402,10 @@ describe('useSuspenseQuery', () => {
     ];
 
     const { result, rerender, renders } = renderSuspenseHook(
-      ({ queryKey }) =>
+      ({ suspenseKey }) =>
         // intentionally use a fetch policy that will execute a network request
-        useSuspenseQuery(query, { queryKey, fetchPolicy: 'network-only' }),
-      { mocks, initialProps: { queryKey: 'first' } }
+        useSuspenseQuery(query, { suspenseKey, fetchPolicy: 'network-only' }),
+      { mocks, initialProps: { suspenseKey: 'first' } }
     );
 
     await waitFor(() => {
@@ -1416,7 +1416,7 @@ describe('useSuspenseQuery', () => {
       });
     });
 
-    rerender({ queryKey: 'second' });
+    rerender({ suspenseKey: 'second' });
 
     await waitFor(() => {
       expect(result.current).toMatchObject({
@@ -1442,7 +1442,7 @@ describe('useSuspenseQuery', () => {
     ]);
   });
 
-  it('suspends and refetches when using numeric query keys', async () => {
+  it('suspends and refetches when using numeric suspense keys', async () => {
     const { query } = useSimpleQueryCase();
 
     const mocks = [
@@ -1459,10 +1459,10 @@ describe('useSuspenseQuery', () => {
     ];
 
     const { result, rerender, renders } = renderSuspenseHook(
-      ({ queryKey }) =>
+      ({ suspenseKey }) =>
         // intentionally use a fetch policy that will execute a network request
-        useSuspenseQuery(query, { queryKey, fetchPolicy: 'network-only' }),
-      { mocks, initialProps: { queryKey: 1 } }
+        useSuspenseQuery(query, { suspenseKey, fetchPolicy: 'network-only' }),
+      { mocks, initialProps: { suspenseKey: 1 } }
     );
 
     await waitFor(() => {
@@ -1473,7 +1473,7 @@ describe('useSuspenseQuery', () => {
       });
     });
 
-    rerender({ queryKey: 2 });
+    rerender({ suspenseKey: 2 });
 
     await waitFor(() => {
       expect(result.current).toMatchObject({

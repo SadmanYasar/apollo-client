@@ -74,13 +74,13 @@ export function useSuspenseQuery_experimental<
   const suspenseCache = useSuspenseCache(options.suspenseCache);
   const watchQueryOptions = useWatchQueryOptions({ query, options });
   const { returnPartialData = false, variables } = watchQueryOptions;
-  const { suspensePolicy = 'always', queryKey = [] } = options;
+  const { suspensePolicy = 'always', suspenseKey = [] } = options;
   const shouldSuspend =
     suspensePolicy === 'always' || !didPreviouslySuspend.current;
 
   const cacheKey = (
     [client, query, canonicalStringify(variables)] as any[]
-  ).concat(queryKey);
+  ).concat(suspenseKey);
 
   const subscription = suspenseCache.getSubscription(cacheKey, () =>
     client.watchQuery(watchQueryOptions)
