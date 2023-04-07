@@ -1,5 +1,11 @@
 # @apollo/client
 
+## 3.8.0-alpha.12
+
+### Minor Changes
+
+- [#10722](https://github.com/apollographql/apollo-client/pull/10722) [`c7e60f83d`](https://github.com/apollographql/apollo-client/commit/c7e60f83dd1dfe07a1b6ce60d9675d3616a2ce66) Thanks [@benjamn](https://github.com/benjamn)! - Implement a `@nonreactive` directive for selectively skipping reactive comparisons of query result subtrees
+
 ## 3.8.0-alpha.11
 
 ### Minor Changes
